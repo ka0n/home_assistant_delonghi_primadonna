@@ -1041,9 +1041,8 @@ class DelongiPrimadonna:
                 return
             await asyncio.sleep(0.3)
 
-            # Request additional coffee totals range
-            # Covers: 3077-3080 (3077 is combined with 3000 for total coffee)
-            if not await self.get_statistics(3077, 4):
+            # Diagnostic: continue observed sparse statistics at parameter 3032
+            if not await self.get_statistics(3032, 10):
                 return
             await asyncio.sleep(0.3)
 

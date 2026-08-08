@@ -382,7 +382,7 @@ async def test_statistics_polling_starts_second_block_at_111():
         (111, 10),
         (3000, 10),
         (3017, 10),
-        (3077, 4),
+        (3032, 10),
     ]
 
 
