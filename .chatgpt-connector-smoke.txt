@@ -1,0 +1,1 @@
+Temporary connector smoke test for branch-only GitHub Actions validation.
