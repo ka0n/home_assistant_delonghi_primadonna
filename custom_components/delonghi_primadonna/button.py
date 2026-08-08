@@ -2,6 +2,7 @@
 
 from homeassistant.components.button import ButtonEntity
 from homeassistant.config_entries import ConfigEntry
+from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
@@ -18,7 +19,10 @@ async def async_setup_entry(
     """Set up button entities for a config entry."""
 
     delongh_device: DelongiPrimadonna = hass.data[DOMAIN][entry.unique_id]
-    async_add_entities([DelongiPrimadonnaPowerButton(delongh_device, hass)])
+    async_add_entities([
+        DelongiPrimadonnaPowerButton(delongh_device, hass),
+        DelongiPrimadonnaPowerOffTestButton(delongh_device, hass),
+    ])
     return True
 
 
@@ -29,3 +33,18 @@ class DelongiPrimadonnaPowerButton(DelonghiDeviceEntity, ButtonEntity):
 
     async def async_press(self):
         self.hass.async_create_task(self.device.power_on())
+
+
+class DelongiPrimadonnaPowerOffTestButton(
+    DelonghiDeviceEntity, ButtonEntity
+):
+    """Temporarily expose the reverse-engineered power-off command."""
+
+    _attr_name = 'Power off test'
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+
+    async def async_press(self):
+        """Send the reverse-engineered standby command."""
+        await self.device.send_command([
+            0x0d, 0x07, 0x84, 0x0f, 0x01, 0x01, 0x00, 0x41
+        ])
