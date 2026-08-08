@@ -1,1 +1,2 @@
 Temporary connector smoke test for branch-only GitHub Actions validation.
+Validate workflow enabled; follow-up commit to trigger CI.
