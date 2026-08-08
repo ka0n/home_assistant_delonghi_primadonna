@@ -1035,15 +1035,15 @@ class DelongiPrimadonna:
                 return
             await asyncio.sleep(0.3)
 
-            # Request additional coffee totals range
-            # Covers: 3077-3080 (3077 is combined with 3000 for total coffee)
-            if not await self.get_statistics(3077, 4):
-                return
-            await asyncio.sleep(0.3)
-
             # Request cold milk, choco and tea statistics
             # Covers: 3017-3026 (3017=cold milk, 3021=choco, 3025=tea)
             if not await self.get_statistics(3017, 10):
+                return
+            await asyncio.sleep(0.3)
+
+            # Request additional coffee totals range
+            # Covers: 3077-3080 (3077 is combined with 3000 for total coffee)
+            if not await self.get_statistics(3077, 4):
                 return
             await asyncio.sleep(0.3)
 
